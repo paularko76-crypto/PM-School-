@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>PM International School – Dungarpur's First AI-Powered School</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --navy: #0b1f4a;
+    --gold: #f4b942;
+    --sky: #4fc3f7;
+    --mint: #a8e6cf;
+    --coral: #ff7c7c;
+    --cream: #fdf6ee;
+    --white: #ffffff;
+    --text: #1a2340;
+    --muted: #6b7a99;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5%;
+    height: 72px;
+    background: rgba(11,31,74,0.96);
+    backdrop-filter: blur(12px);
+    border-bottom: 2px solid var(--gold);
+  }
+  .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .nav-logo-icon {
+    width: 42px; height: 42px; border-radius: 10px;
+    background: linear-gradient(135deg, var(--gold), #e89b2a);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+  }
+  .nav-logo-text { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--white); line-height: 1.2; }
+  .nav-logo-text span { color: var(--gold); font-size: 0.7rem; font-family: 'DM Sans', sans-serif; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; display: block; }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.88rem; font-weight: 500; letter-spacing: 0.5px; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta {
+    background: var(--gold); color: var(--navy);
+    padding: 10px 22px; border-radius: 8px;
+    font-weight: 600; font-size: 0.88rem; text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(244,185,66,0.4); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    background: linear-gradient(160deg, var(--navy) 0%, #133070 50%, #1a4a8a 100%);
+    display: flex; align-items: center;
+    padding: 100px 5% 60px;
+    position: relative; overflow: hidden;
+  }
+  .hero-bg-circles {
+    position: absolute; inset: 0; pointer-events: none;
+  }
+  .hero-bg-circles::before {
+    content: '';
+    position: absolute; top: -120px; right: -100px;
+    width: 600px; height: 600px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(79,195,247,0.15) 0%, transparent 70%);
+  }
+  .hero-bg-circles::after {
+    content: '';
+    position: absolute; bottom: -80px; left: -80px;
+    width: 400px; height: 400px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(244,185,66,0.12) 0%, transparent 70%);
+  }
+  .hero-content { max-width: 650px; position: relative; z-index: 2; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(244,185,66,0.15); border: 1px solid rgba(244,185,66,0.4);
+    color: var(--gold); padding: 7px 16px; border-radius: 100px;
+    font-size: 0.8rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
+    margin-bottom: 28px;
+    animation: fadeUp 0.6s ease both;
+  }
+  .hero-badge .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); animation: pulse 1.5s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.3)} }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    color: var(--white); line-height: 1.1;
+    margin-bottom: 20px;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+  .hero-title em { color: var(--gold); font-style: normal; }
+  .hero-sub {
+    font-size: 1.05rem; color: rgba(255,255,255,0.72);
+    line-height: 1.7; margin-bottom: 40px;
+    animation: fadeUp 0.6s 0.2s ease both;
+    max-width: 500px;
+  }
+  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; animation: fadeUp 0.6s 0.3s ease both; }
+  .btn-primary {
+    background: var(--gold); color: var(--navy);
+    padding: 14px 30px; border-radius: 10px;
+    font-weight: 700; font-size: 0.95rem; text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(244,185,66,0.45); }
+  .btn-outline {
+    border: 2px solid rgba(255,255,255,0.3); color: var(--white);
+    padding: 14px 30px; border-radius: 10px;
+    font-weight: 600; font-size: 0.95rem; text-decoration: none;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,0.08); }
+
+  .hero-stats {
+    display: flex; gap: 40px; margin-top: 60px;
+    animation: fadeUp 0.6s 0.4s ease both;
+  }
+  .stat { text-align: left; }
+  .stat-num { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--gold); font-weight: 900; }
+  .stat-label { font-size: 0.78rem; color: rgba(255,255,255,0.55); letter-spacing: 1px; text-transform: uppercase; margin-top: 2px; }
+
+  .hero-visual {
+    position: absolute; right: 5%; top: 50%; transform: translateY(-50%);
+    width: min(420px, 40vw);
+    animation: fadeUp 0.8s 0.2s ease both;
+  }
+  .hero-card {
+    background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 24px; padding: 36px;
+    backdrop-filter: blur(20px);
+  }
+  .ai-icon-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-bottom: 24px; }
+  .ai-icon-item {
+    background: rgba(255,255,255,0.08); border-radius: 14px;
+    padding: 18px 12px; text-align: center;
+    border: 1px solid rgba(255,255,255,0.1);
+    transition: transform 0.3s;
+  }
+  .ai-icon-item:hover { transform: translateY(-4px); }
+  .ai-icon-item .emoji { font-size: 1.8rem; display: block; margin-bottom: 6px; }
+  .ai-icon-item .label { font-size: 0.7rem; color: rgba(255,255,255,0.65); font-weight: 500; }
+  .hero-card-title { font-family: 'Playfair Display', serif; color: var(--white); font-size: 1.15rem; margin-bottom: 8px; }
+  .hero-card-sub { font-size: 0.82rem; color: rgba(255,255,255,0.55); line-height: 1.6; }
+  .opening-banner {
+    background: linear-gradient(90deg, var(--gold), #e89b2a);
+    color: var(--navy); padding: 12px 20px; border-radius: 12px;
+    margin-top: 20px; font-weight: 700; font-size: 0.9rem;
+    text-align: center; letter-spacing: 0.3px;
+  }
+
+  /* ── SECTIONS SHARED ── */
+  section { padding: 90px 5%; }
+  .section-tag {
+    display: inline-block;
+    background: rgba(11,31,74,0.08); color: var(--navy);
+    padding: 5px 14px; border-radius: 100px;
+    font-size: 0.75rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: var(--navy); line-height: 1.2; margin-bottom: 16px;
+  }
+  .section-title em { color: var(--gold); font-style: normal; }
+  .section-sub { font-size: 1rem; color: var(--muted); line-height: 1.7; max-width: 560px; }
+
+  /* ── ABOUT ── */
+  #about { background: var(--white); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .about-img-wrap { position: relative; }
+  .about-img-wrap::before {
+    content: '';
+    position: absolute; inset: -16px;
+    background: linear-gradient(135deg, var(--gold) 0%, transparent 60%);
+    border-radius: 28px; z-index: 0;
+    opacity: 0.25;
+  }
+  .about-img-block {
+    background: linear-gradient(135deg, var(--navy) 0%, #1a4a8a 100%);
+    border-radius: 24px; padding: 50px 40px;
+    position: relative; z-index: 1;
+    text-align: center;
+  }
+  .about-img-block .school-logo-big {
+    font-size: 5rem; margin-bottom: 16px; display: block;
+  }
+  .about-img-block h3 { font-family: 'Playfair Display', serif; color: var(--white); font-size: 1.5rem; margin-bottom: 8px; }
+  .about-img-block p { color: rgba(255,255,255,0.6); font-size: 0.88rem; }
+  .about-img-block .tagline {
+    margin-top: 24px;
+    background: rgba(244,185,66,0.15); border: 1px solid rgba(244,185,66,0.3);
+    border-radius: 12px; padding: 14px 20px;
+    color: var(--gold); font-weight: 600; font-size: 0.88rem;
+  }
+  .about-text .about-features { margin-top: 32px; display: flex; flex-direction: column; gap: 16px; }
+  .about-feat {
+    display: flex; align-items: flex-start; gap: 16px;
+    padding: 18px; border-radius: 14px;
+    background: var(--cream); border: 1px solid rgba(11,31,74,0.07);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .about-feat:hover { transform: translateX(6px); box-shadow: 4px 0 0 var(--gold); }
+  .about-feat-icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: linear-gradient(135deg, var(--navy), #2060b0);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem; flex-shrink: 0;
+  }
+  .about-feat-text h4 { font-size: 0.95rem; font-weight: 600; color: var(--navy); margin-bottom: 4px; }
+  .about-feat-text p { font-size: 0.82rem; color: var(--muted); line-height: 1.5; }
+
+  /* ── CLASSES ── */
+  #classes { background: var(--cream); }
+  .classes-header { text-align: center; margin-bottom: 56px; }
+  .classes-header .section-sub { margin: 0 auto; }
+  .classes-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .class-card {
+    background: var(--white); border-radius: 20px;
+    padding: 36px 28px; text-align: center;
+    border: 2px solid transparent;
+    transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    position: relative; overflow: hidden;
+  }
+  .class-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(90deg, var(--navy), var(--sky));
+  }
+  .class-card:hover { border-color: var(--sky); transform: translateY(-6px); box-shadow: 0 20px 40px rgba(11,31,74,0.12); }
+  .class-card .class-emoji { font-size: 2.6rem; display: block; margin-bottom: 16px; }
+  .class-card h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--navy); margin-bottom: 8px; }
+  .class-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
+  .class-age { display: inline-block; margin-top: 14px; background: rgba(11,31,74,0.06); color: var(--navy); padding: 4px 12px; border-radius: 100px; font-size: 0.75rem; font-weight: 600; }
+
+  /* ── WHY CHOOSE ── */
+  #why { background: var(--navy); }
+  #why .section-tag { background: rgba(244,185,66,0.15); color: var(--gold); }
+  #why .section-title { color: var(--white); }
+  #why .section-sub { color: rgba(255,255,255,0.6); }
+  .why-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; margin-top: 48px; }
+  .why-card {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 20px; padding: 32px 24px;
+    transition: background 0.3s, transform 0.3s;
+  }
+  .why-card:hover { background: rgba(255,255,255,0.09); transform: translateY(-4px); }
+  .why-card .why-icon { font-size: 2.2rem; margin-bottom: 16px; }
+  .why-card h3 { font-family: 'Playfair Display', serif; color: var(--white); font-size: 1.05rem; margin-bottom: 8px; }
+  .why-card p { font-size: 0.83rem; color: rgba(255,255,255,0.55); line-height: 1.6; }
+  .why-check {
+    display: inline-block; width: 8px; height: 8px; border-radius: 50%;
+    background: var(--mint); margin-right: 6px;
+  }
+
+  /* ── APPROACH ── */
+  #approach { background: var(--white); }
+  .approach-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; margin-top: 48px; }
+  .approach-list { display: flex; flex-direction: column; gap: 20px; }
+  .approach-item {
+    display: flex; gap: 20px; align-items: flex-start;
+    padding: 22px; border-radius: 16px;
+    background: var(--cream); border-left: 4px solid transparent;
+    transition: border-color 0.3s, background 0.3s;
+  }
+  .approach-item:hover { border-color: var(--gold); background: #fffbf2; }
+  .approach-num {
+    width: 40px; height: 40px; border-radius: 12px; flex-shrink: 0;
+    background: var(--navy); color: var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.1rem;
+  }
+  .approach-item h4 { font-size: 0.95rem; font-weight: 600; color: var(--navy); margin-bottom: 4px; }
+  .approach-item p { font-size: 0.82rem; color: var(--muted); line-height: 1.5; }
+  .approach-visual {
+    background: linear-gradient(135deg, #e8f4ff 0%, #f0fff4 100%);
+    border-radius: 24px; padding: 48px 40px;
+    text-align: center;
+  }
+  .approach-visual .big-emoji { font-size: 5rem; display: block; margin-bottom: 20px; }
+  .approach-visual h3 { font-family: 'Playfair Display', serif; color: var(--navy); font-size: 1.5rem; margin-bottom: 12px; }
+  .approach-visual p { color: var(--muted); font-size: 0.9rem; line-height: 1.6; }
+  .approach-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; justify-content: center; }
+  .tag {
+    background: var(--white); color: var(--navy);
+    padding: 7px 14px; border-radius: 100px;
+    font-size: 0.78rem; font-weight: 600;
+    border: 1.5px solid rgba(11,31,74,0.12);
+  }
+
+  /* ── FACILITIES ── */
+  #facilities { background: var(--cream); }
+  .facilities-header { text-align: center; margin-bottom: 56px; }
+  .facilities-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+  .fac-card {
+    background: var(--white); border-radius: 20px; padding: 32px 24px;
+    text-align: center; position: relative; overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .fac-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(11,31,74,0.1); }
+  .fac-card .fac-emoji { font-size: 2.8rem; display: block; margin-bottom: 16px; }
+  .fac-card h3 { font-size: 1rem; font-weight: 600; color: var(--navy); margin-bottom: 8px; }
+  .fac-card p { font-size: 0.82rem; color: var(--muted); line-height: 1.5; }
+
+  /* ── ADMISSION ── */
+  #admission {
+    background: linear-gradient(135deg, var(--navy) 0%, #1a4a8a 100%);
+    text-align: center;
+  }
+  #admission .section-tag { background: rgba(244,185,66,0.15); color: var(--gold); margin: 0 auto 16px; display: block; width: fit-content; }
+  #admission .section-title { color: var(--white); }
+  #admission .section-sub { color: rgba(255,255,255,0.6); margin: 0 auto 48px; }
+  .steps-row { display: flex; justify-content: center; gap: 0; max-width: 900px; margin: 0 auto 48px; }
+  .step {
+    flex: 1; text-align: center; position: relative;
+    padding: 0 16px;
+  }
+  .step::after {
+    content: '→';
+    position: absolute; right: -8px; top: 20px;
+    color: rgba(255,255,255,0.3); font-size: 1.2rem;
+  }
+  .step:last-child::after { display: none; }
+  .step-num {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--gold); color: var(--navy);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 1.1rem;
+    margin: 0 auto 12px;
+  }
+  .step h4 { font-size: 0.85rem; font-weight: 600; color: var(--white); margin-bottom: 4px; }
+  .step p { font-size: 0.75rem; color: rgba(255,255,255,0.5); line-height: 1.5; }
+
+  /* ── CONTACT ── */
+  #contact { background: var(--white); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+  .contact-info { display: flex; flex-direction: column; gap: 24px; margin-top: 32px; }
+  .contact-item {
+    display: flex; gap: 16px; align-items: flex-start;
+    padding: 20px; border-radius: 16px; background: var(--cream);
+  }
+  .contact-icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: var(--navy); display: flex; align-items: center;
+    justify-content: center; font-size: 1.2rem; flex-shrink: 0;
+  }
+  .contact-item h4 { font-size: 0.82rem; color: var(--muted); margin-bottom: 4px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; }
+  .contact-item p, .contact-item a { font-size: 1rem; font-weight: 600; color: var(--navy); text-decoration: none; }
+  .contact-item a:hover { color: var(--sky); }
+
+  .contact-form-wrap {
+    background: var(--cream); border-radius: 24px;
+    padding: 40px; border: 1px solid rgba(11,31,74,0.08);
+  }
+  .contact-form-wrap h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--navy); margin-bottom: 24px; }
+  .form-group { margin-bottom: 16px; }
+  .form-group label { display: block; font-size: 0.82rem; font-weight: 600; color: var(--navy); margin-bottom: 6px; }
+  .form-group input, .form-group select, .form-group textarea {
+    width: 100%; padding: 12px 16px; border-radius: 10px;
+    border: 1.5px solid rgba(11,31,74,0.15);
+    font-family: 'DM Sans', sans-serif; font-size: 0.9rem; color: var(--navy);
+    background: var(--white); outline: none;
+    transition: border-color 0.2s;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    border-color: var(--sky);
+  }
+  .form-group textarea { resize: vertical; min-height: 100px; }
+  .form-submit {
+    width: 100%; padding: 14px; border-radius: 10px;
+    background: var(--navy); color: var(--white);
+    border: none; font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem; font-weight: 700; cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .form-submit:hover { background: #1a3a6a; transform: translateY(-1px); }
+  .form-success {
+    display: none; text-align: center; padding: 20px;
+    background: #e8fff5; border-radius: 12px; color: #2d7a5f;
+    font-weight: 600; margin-top: 12px;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #070e20; padding: 48px 5% 28px;
+    text-align: center;
+  }
+  .footer-logo { font-family: 'Playfair Display', serif; color: var(--white); font-size: 1.4rem; margin-bottom: 8px; }
+  .footer-logo span { color: var(--gold); }
+  .footer-tagline { color: rgba(255,255,255,0.4); font-size: 0.82rem; margin-bottom: 28px; }
+  .footer-links { display: flex; justify-content: center; gap: 28px; list-style: none; margin-bottom: 32px; flex-wrap: wrap; }
+  .footer-links a { color: rgba(255,255,255,0.55); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--gold); }
+  .footer-bottom { color: rgba(255,255,255,0.25); font-size: 0.78rem; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 24px; }
+
+  /* ── MOBILE ── */
+  @media (max-width: 900px) {
+    .hero-visual { display: none; }
+    .about-grid, .approach-grid, .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+    .classes-grid, .why-grid, .facilities-grid { grid-template-columns: 1fr 1fr; }
+    .steps-row { flex-direction: column; align-items: center; gap: 16px; }
+    .step::after { display: none; }
+    .nav-links { display: none; }
+  }
+  @media (max-width: 580px) {
+    .classes-grid, .why-grid, .facilities-grid { grid-template-columns: 1fr; }
+    .hero-stats { gap: 24px; }
+  }
+
+  /* ── WHATSAPP FLOAT ── */
+  .wa-float {
+    position: fixed; bottom: 28px; right: 28px; z-index: 999;
+    width: 58px; height: 58px; border-radius: 50%;
+    background: #25d366;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 6px 24px rgba(37,211,102,0.5);
+    transition: transform 0.25s, box-shadow 0.25s;
+    animation: waPop 0.6s 1.5s ease both;
+  }
+  @keyframes waPop { from{opacity:0;transform:scale(0.5)} to{opacity:1;transform:scale(1)} }
+  .wa-float:hover { transform: scale(1.1); box-shadow: 0 10px 32px rgba(37,211,102,0.6); }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">
+    <div class="nav-logo-icon">🏫</div>
+    <div class="nav-logo-text">PM International School <span>Dungarpur, Rajasthan</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#classes">Classes</a></li>
+    <li><a href="#facilities">Facilities</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Enroll Now →</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg-circles"></div>
+  <div class="hero-content">
+    <div class="hero-badge"><span class="dot"></span> Dungarpur's First AI-Powered School</div>
+    <h1 class="hero-title">Where <em>Bright Futures</em> Begin with AI</h1>
+    <p class="hero-sub">Admissions open for Playgroup to Class II. We blend timeless values with cutting-edge AI education to give every child the best possible start.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Apply for Admission →</a>
+      <a href="#about" class="btn-outline">Learn More</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-num">6+</div><div class="stat-label">Grade Levels</div></div>
+      <div class="stat"><div class="stat-num">AI</div><div class="stat-label">Integrated Learning</div></div>
+      <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Child Safety Focus</div></div>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="hero-card">
+      <div class="ai-icon-grid">
+        <div class="ai-icon-item"><span class="emoji">🤖</span><span class="label">AI Tools</span></div>
+        <div class="ai-icon-item"><span class="emoji">🎨</span><span class="label">Creative Arts</span></div>
+        <div class="ai-icon-item"><span class="emoji">📚</span><span class="label">Literacy</span></div>
+        <div class="ai-icon-item"><span class="emoji">🧩</span><span class="label">Problem Solving</span></div>
+        <div class="ai-icon-item"><span class="emoji">🎵</span><span class="label">Music</span></div>
+        <div class="ai-icon-item"><span class="emoji">🌱</span><span class="label">Values</span></div>
+      </div>
+      <div class="hero-card-title">Holistic AI Education</div>
+      <div class="hero-card-sub">Smart classrooms, digital activities, and age-appropriate AI tools — all in one joyful campus.</div>
+      <div class="opening-banner">🎉 Grand Opening: 15th March — Surprise Gifts for Kids!</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-img-wrap reveal">
+      <div class="about-img-block">
+        <span class="school-logo-big">🎓</span>
+        <h3>PM International School</h3>
+        <p>Simalwara Road, Near Bori Bus Stand, Dungarpur</p>
+        <div class="tagline">🌟 First AI-Integrated School in Dungarpur</div>
+      </div>
+    </div>
+    <div class="about-text reveal">
+      <span class="section-tag">About Us</span>
+      <h2 class="section-title">Education That <em>Future-Proofs</em> Your Child</h2>
+      <p class="section-sub">PM International School combines traditional values with modern AI technology. We believe every child deserves a joyful, safe, and inspiring start — and we deliver exactly that.</p>
+      <div class="about-features">
+        <div class="about-feat">
+          <div class="about-feat-icon">🤖</div>
+          <div class="about-feat-text"><h4>AI-Integrated Curriculum</h4><p>Age-appropriate AI tools and smart classrooms develop logical thinking from an early age.</p></div>
+        </div>
+        <div class="about-feat">
+          <div class="about-feat-icon">💛</div>
+          <div class="about-feat-text"><h4>Experienced & Caring Teachers</h4><p>Every educator is trained to give individual attention with warmth and patience.</p></div>
+        </div>
+        <div class="about-feat">
+          <div class="about-feat-icon">🛡️</div>
+          <div class="about-feat-text"><h4>Safe & Secure Campus</h4><p>CCTV surveillance, trained staff, and rigorous hygiene standards keep children safe.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLASSES -->
+<section id="classes">
+  <div class="classes-header reveal">
+    <span class="section-tag">Academics</span>
+    <h2 class="section-title">Classes We <em>Offer</em></h2>
+    <p class="section-sub">Structured yet flexible curricula tailored to each developmental stage — from first steps to foundational academics.</p>
+  </div>
+  <div class="classes-grid">
+    <div class="class-card reveal"><span class="class-emoji">🧸</span><h3>Playgroup</h3><p>Sensory play and early social skills through safe, joyful exploration.</p><span class="class-age">Ages 1.5 – 2.5 yrs</span></div>
+    <div class="class-card reveal"><span class="class-emoji">🌸</span><h3>Nursery</h3><p>Language development, colours, shapes, and early motor skills.</p><span class="class-age">Ages 2.5 – 3.5 yrs</span></div>
+    <div class="class-card reveal"><span class="class-emoji">🔤</span><h3>LKG</h3><p>Phonics, numbers, and hands-on activities to spark curiosity.</p><span class="class-age">Ages 3.5 – 4.5 yrs</span></div>
+    <div class="class-card reveal"><span class="class-emoji">🔢</span><h3>UKG</h3><p>Reading readiness, numeracy foundations, and creative expression.</p><span class="class-age">Ages 4.5 – 5.5 yrs</span></div>
+    <div class="class-card reveal"><span class="class-emoji">📖</span><h3>Class I</h3><p>Formal literacy, maths, environmental science, and AI basics.</p><span class="class-age">Ages 5.5 – 6.5 yrs</span></div>
+    <div class="class-card reveal"><span class="class-emoji">🚀</span><h3>Class II</h3><p>Advanced reading, problem-solving, and digital learning tools.</p><span class="class-age">Ages 6.5 – 7.5 yrs</span></div>
+  </div>
+</section>
+
+<!-- WHY CHOOSE -->
+<section id="why">
+  <div class="reveal">
+    <span class="section-tag">Why PM International</span>
+    <h2 class="section-title">Every Reason to <em>Choose Us</em></h2>
+    <p class="section-sub">We go beyond academics to raise confident, curious, and compassionate children.</p>
+  </div>
+  <div class="why-grid">
+    <div class="why-card reveal"><div class="why-icon">👩‍🏫</div><h3>Experienced Teachers</h3><p>Qualified educators with deep training in early childhood development and AI-assisted teaching methods.</p></div>
+    <div class="why-card reveal"><div class="why-icon">🏫</div><h3>Child-Friendly Campus</h3><p>Colourful, spacious classrooms designed to make every child feel comfortable, safe, and excited to learn.</p></div>
+    <div class="why-card reveal"><div class="why-icon">⚖️</div><h3>Balanced Development</h3><p>Academics, arts, physical activity, and moral values — all given equal importance every single day.</p></div>
+    <div class="why-card reveal"><div class="why-icon">🤝</div><h3>Parent Engagement</h3><p>Regular parent-teacher interactions ensure you're always involved in your child's growth journey.</p></div>
+    <div class="why-card reveal"><div class="why-icon">🤖</div><h3>AI-First Vision</h3><p>First school in Dungarpur to integrate AI into early education — preparing children for tomorrow, today.</p></div>
+    <div class="why-card reveal"><div class="why-icon">🌟</div><h3>Values & Discipline</h3><p>Strong emphasis on manners, respect, and character-building alongside every academic milestone.</p></div>
+  </div>
+</section>
+
+<!-- APPROACH -->
+<section id="approach">
+  <div class="approach-grid">
+    <div class="reveal">
+      <span class="section-tag">Our Approach</span>
+      <h2 class="section-title">Learning That <em>Feels Like Fun</em></h2>
+      <p class="section-sub">Our pedagogy is rooted in joy. Every lesson is designed so children are engaged, confident, and eager for more.</p>
+      <div class="approach-list">
+        <div class="approach-item"><div class="approach-num">1</div><div><h4>Play-Based & Activity-Based Learning</h4><p>Children absorb concepts naturally through guided play and hands-on activities.</p></div></div>
+        <div class="approach-item"><div class="approach-num">2</div><div><h4>Interactive Storytelling & Role Play</h4><p>Language and imagination flourish through immersive, creative storytelling sessions.</p></div></div>
+        <div class="approach-item"><div class="approach-num">3</div><div><h4>Communication & Confidence Building</h4><p>Every child is encouraged to speak, express, and grow their interpersonal skills.</p></div></div>
+        <div class="approach-item"><div class="approach-num">4</div><div><h4>Individual Attention for Every Child</h4><p>Small class sizes ensure no child is left behind or overlooked.</p></div></div>
+      </div>
+    </div>
+    <div class="approach-visual reveal">
+      <span class="big-emoji">🎓</span>
+      <h3>Curriculum Highlights</h3>
+      <p>A comprehensive, stress-free program covering all dimensions of early childhood development.</p>
+      <div class="approach-tags">
+        <span class="tag">📝 Early Literacy</span>
+        <span class="tag">🔢 Numeracy</span>
+        <span class="tag">🎵 Music & Dance</span>
+        <span class="tag">🎨 Creative Arts</span>
+        <span class="tag">🏃 Motor Skills</span>
+        <span class="tag">🌿 Values & Manners</span>
+        <span class="tag">📖 Phonics</span>
+        <span class="tag">🤖 AI Basics</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FACILITIES -->
+<section id="facilities">
+  <div class="facilities-header reveal">
+    <span class="section-tag">Infrastructure</span>
+    <h2 class="section-title">World-Class <em>Facilities</em></h2>
+    <p class="section-sub">A campus built with children in mind — safe, clean, stimulating, and full of wonder.</p>
+  </div>
+  <div class="facilities-grid">
+    <div class="fac-card reveal"><span class="fac-emoji">🏫</span><h3>Colourful Classrooms</h3><p>Spacious, bright, and thoughtfully designed to spark curiosity and creativity.</p></div>
+    <div class="fac-card reveal"><span class="fac-emoji">🛝</span><h3>Safe Play Area</h3><p>Outdoor play zones with age-appropriate equipment for physical activity and fun.</p></div>
+    <div class="fac-card reveal"><span class="fac-emoji">🧸</span><h3>Learning Toys & Kits</h3><p>Curated educational materials and kits for hands-on, experiential learning.</p></div>
+    <div class="fac-card reveal"><span class="fac-emoji">💧</span><h3>Clean Water & Hygiene</h3><p>Purified drinking water, clean washrooms, and regular sanitation protocols.</p></div>
+    <div class="fac-card reveal"><span class="fac-emoji">📷</span><h3>CCTV Surveillance</h3><p>Full campus monitoring so parents can always have complete peace of mind.</p></div>
+    <div class="fac-card reveal"><span class="fac-emoji">🩺</span><h3>First Aid & Child Safety</h3><p>Trained staff and first-aid readiness for every possible situation.</p></div>
+  </div>
+</section>
+
+<!-- ADMISSION -->
+<section id="admission">
+  <span class="section-tag">Admissions 2025–26</span>
+  <h2 class="section-title" style="color:var(--white);">Simple <em>Admission Process</em></h2>
+  <p class="section-sub">5 easy steps to secure your child's bright future. Limited seats available — act fast!</p>
+  <div class="steps-row reveal">
+    <div class="step"><div class="step-num">1</div><h4>Visit Campus</h4><p>Come see our school in person</p></div>
+    <div class="step"><div class="step-num">2</div><h4>Meet Counselor</h4><p>Discuss your child's needs</p></div>
+    <div class="step"><div class="step-num">3</div><h4>Fill Form</h4><p>Complete the admission form</p></div>
+    <div class="step"><div class="step-num">4</div><h4>Submit Docs</h4><p>Provide required documents</p></div>
+    <div class="step"><div class="step-num">5</div><h4>Confirm</h4><p>Secure your child's seat</p></div>
+  </div>
+  <a href="#contact" class="btn-primary" style="margin:0 auto;display:inline-flex;">Begin Enrollment Today →</a>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-grid">
+    <div class="reveal">
+      <span class="section-tag">Get in Touch</span>
+      <h2 class="section-title">We'd Love to <em>Hear from You</em></h2>
+      <p class="section-sub">Visit us or reach out — our team is happy to answer all your questions about admissions and curriculum.</p>
+      <div class="contact-info">
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div><h4>Address</h4><p>Simalwara Road, Near Bori Bus Stand, Dungarpur, Rajasthan</p></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📞</div>
+          <div><h4>Phone</h4><a href="tel:7470066999">7470066999</a></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📧</div>
+          <div><h4>Email</h4><a href="mailto:pm@pminternationalschool.org">pm@pminternationalschool.org</a></div>
+        </div>
+      </div>
+    </div>
+    <div class="contact-form-wrap reveal">
+      <h3>Enquire About Admission</h3>
+      <div class="form-group">
+        <label>Parent's Name</label>
+        <input type="text" placeholder="Your full name" id="parentName"/>
+      </div>
+      <div class="form-group">
+        <label>Phone Number</label>
+        <input type="tel" placeholder="Your contact number" id="phone"/>
+      </div>
+      <div class="form-group">
+        <label>Child's Age / Class Interested In</label>
+        <select id="classSelect">
+          <option value="">Select a class</option>
+          <option>Playgroup (1.5 – 2.5 yrs)</option>
+          <option>Nursery (2.5 – 3.5 yrs)</option>
+          <option>LKG (3.5 – 4.5 yrs)</option>
+          <option>UKG (4.5 – 5.5 yrs)</option>
+          <option>Class I (5.5 – 6.5 yrs)</option>
+          <option>Class II (6.5 – 7.5 yrs)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Message (optional)</label>
+        <textarea placeholder="Any questions or special requirements..." id="message"></textarea>
+      </div>
+      <button class="form-submit" onclick="handleSubmit()">Send via WhatsApp →</button>
+      <div class="form-success" id="successMsg">✅ Opening WhatsApp with your enquiry pre-filled. If it doesn't open, <a href="https://wa.me/917470066999" target="_blank" style="color:var(--navy);font-weight:700;">click here</a>.</div>
+    </div>
+  </div>
+</section>
+
+<!-- WHATSAPP FLOATING BUTTON -->
+<a href="https://wa.me/917470066999?text=Hello%20PM%20International%20School!%20I'd%20like%20to%20enquire%20about%20admission." target="_blank" class="wa-float" title="Chat on WhatsApp">
+  <svg viewBox="0 0 32 32" fill="white" xmlns="http://www.w3.org/2000/svg" width="28" height="28">
+    <path d="M16 2C8.268 2 2 8.268 2 16c0 2.478.675 4.8 1.85 6.788L2 30l7.418-1.822A13.94 13.94 0 0016 30c7.732 0 14-6.268 14-14S23.732 2 16 2zm7.07 19.49c-.297.835-1.73 1.595-2.373 1.692-.608.09-1.376.128-2.22-.14-.512-.163-1.169-.38-2.012-.744-3.54-1.528-5.854-5.1-6.03-5.333-.176-.234-1.434-1.907-1.434-3.638 0-1.73.907-2.583 1.228-2.937.32-.354.7-.443.933-.443.234 0 .468.002.673.012.216.01.505-.082.79.603.298.707 1.012 2.437 1.1 2.613.088.175.147.38.03.614-.118.234-.177.38-.354.585-.176.205-.37.458-.528.615-.176.175-.36.365-.154.717.205.353.912 1.504 1.958 2.435 1.344 1.198 2.478 1.568 2.83 1.744.354.175.56.147.767-.088.205-.235.878-1.024 1.112-1.376.234-.353.468-.294.79-.176.32.117 2.05.967 2.403 1.142.353.176.588.264.675.41.088.147.088.847-.21 1.682z"/>
+  </svg>
+</a>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">PM <span>International</span> School</div>
+  <div class="footer-tagline">Dungarpur's First AI-Powered School · Where Bright Futures Begin</div>
+  <ul class="footer-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#classes">Classes</a></li>
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="#facilities">Facilities</a></li>
+    <li><a href="#admission">Admissions</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="footer-bottom">© 2025 PM International School, Dungarpur. All rights reserved.</div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(r => observer.observe(r));
+
+  // WhatsApp form submit
+  function handleSubmit() {
+    const name = document.getElementById('parentName').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const classVal = document.getElementById('classSelect').value;
+    const message = document.getElementById('message').value.trim();
+
+    if (!name || !phone) {
+      alert('Please fill in your name and phone number.');
+      return;
+    }
+
+    const schoolPhone = '917470066999'; // India country code + number
+    const text = `Hello PM International School! 👋\n\n` +
+      `I'd like to enquire about admission.\n\n` +
+      `👤 *Parent Name:* ${name}\n` +
+      `📞 *Phone:* ${phone}\n` +
+      `🏫 *Class Interested:* ${classVal || 'Not specified'}\n` +
+      `💬 *Message:* ${message || 'No additional message'}\n\n` +
+      `Please get in touch with me. Thank you!`;
+
+    const encoded = encodeURIComponent(text);
+    const waURL = `https://wa.me/${schoolPhone}?text=${encoded}`;
+
+    // Show success message
+    document.getElementById('successMsg').style.display = 'block';
+    document.querySelector('.form-submit').disabled = true;
+    document.querySelector('.form-submit').textContent = 'Opening WhatsApp... ✓';
+
+    // Open WhatsApp after short delay
+    setTimeout(() => { window.open(waURL, '_blank'); }, 600);
+  }
+
+  // Smooth nav highlight
+  const sections = document.querySelectorAll('section[id]');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 100) current = s.id; });
+    document.querySelectorAll('.nav-links a').forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current ? 'var(--gold)' : '';
+    });
+  });
+</script>
+</body>
+</html>
